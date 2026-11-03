@@ -1,264 +1,266 @@
+from pathlib import Path
 
-<!DOCTYPE html>
+html = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shanmugapriya D | Java Developer</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #0b1220;
-            color: #edf2f7;
-            line-height: 1.7;
-        }
-
-        header {
-            padding: 20px 8%;
-            background: #121d30;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        nav h2 {
-            color: #67e8c2;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
-
-        section {
-            padding: 60px 10%;
-        }
-
-        .hero {
-            padding-top: 100px;
-            padding-bottom: 100px;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin: 15px 0;
-        }
-
-        .hero span {
-            color: #67e8c2;
-        }
-
-        .subtitle {
-            color: #67e8c2;
-        }
-
-        p {
-            color: #a9b7ca;
-            margin-top: 10px;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .skills span {
-            background: #1c2b40;
-            padding: 10px 18px;
-            border-radius: 20px;
-        }
-
-        .card {
-            background: #121d30;
-            padding: 25px;
-            margin-bottom: 18px;
-            border-radius: 10px;
-            border: 1px solid #26364d;
-        }
-
-        .card h3 {
-            color: #67e8c2;
-        }
-
-        a {
-            color: #67e8c2;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #121d30;
-        }
-
-        @media(max-width: 600px) {
-            .hero h1 {
-                font-size: 35px;
-            }
-
-            nav {
-                gap: 15px;
-            }
-
-            nav a {
-                margin-left: 0;
-                margin-right: 10px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shanmugapriya D — Java Backend Developer specializing in Java, Spring Boot, REST APIs and MySQL.">
+  <title>Shanmugapriya D | Java Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #17233b;
+      --muted: #68758b;
+      --paper: #f7f8fc;
+      --white: #ffffff;
+      --accent: #6558d3;
+      --accent-dark: #5145bd;
+      --mint: #dff5ed;
+      --line: #e7eaf2;
+      --shadow: 0 18px 55px rgba(34, 43, 75, .08);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 95px; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif;
+      line-height: 1.7;
+    }
+    a { color: inherit; }
+    .container { width: min(1120px, 90%); margin: 0 auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,255,255,.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(231,234,242,.9);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { font: 800 20px "Manrope", sans-serif; letter-spacing: -.7px; text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links .nav-cta { color: var(--accent); border: 1px solid #dcd8fb; padding: 9px 15px; border-radius: 999px; }
+    .hero { padding: 94px 0 82px; position: relative; overflow: hidden; }
+    .hero:before {
+      content: ""; position: absolute; width: 440px; height: 440px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(101,88,211,.13), rgba(101,88,211,0) 68%);
+      right: -115px; top: -95px; pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.45fr .75fr; align-items: center; gap: 55px; position: relative; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--accent); text-transform: uppercase; letter-spacing: 1.8px; font-size: 11px; font-weight: 700; }
+    .eyebrow:before { content: ""; width: 24px; height: 2px; background: var(--accent); }
+    h1, h2, h3 { font-family: "Manrope", sans-serif; }
+    h1 { font-size: clamp(42px, 6vw, 66px); line-height: 1.12; letter-spacing: -2.8px; margin: 20px 0 19px; max-width: 720px; }
+    h1 span { color: var(--accent); }
+    .intro { color: var(--muted); font-size: 17px; max-width: 650px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 13px 20px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 14px; transition: transform .2s, box-shadow .2s, background .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .primary { color: white; background: var(--accent); box-shadow: 0 9px 22px rgba(101,88,211,.22); }
+    .primary:hover { background: var(--accent-dark); }
+    .secondary { color: var(--ink); background: white; border: 1px solid var(--line); }
+    .profile-card { background: white; border: 1px solid var(--line); border-radius: 28px; padding: 27px; box-shadow: var(--shadow); transform: rotate(1.5deg); }
+    .profile-mark { width: 76px; height: 76px; border-radius: 23px; display: grid; place-items: center; color: white; font: 800 27px "Manrope"; background: linear-gradient(135deg, #8176e8, #5145bd); margin-bottom: 23px; }
+    .profile-card h3 { font-size: 19px; margin-bottom: 5px; }
+    .profile-card p { color: var(--muted); font-size: 13px; }
+    .availability { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 8px 12px; background: #effaf5; color: #287a59; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .availability:before { content: ""; width: 7px; height: 7px; background: #36ad79; border-radius: 50%; }
+    section { padding: 74px 0; }
+    .section-head { margin-bottom: 30px; }
+    .section-kicker { color: var(--accent); font-size: 11px; text-transform: uppercase; letter-spacing: 1.7px; font-weight: 700; }
+    h2 { font-size: clamp(29px, 4vw, 38px); letter-spacing: -1.2px; margin-top: 7px; }
+    .section-copy { color: var(--muted); max-width: 760px; margin-top: 12px; }
+    .about-panel { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); }
+    .about-panel p { color: var(--muted); }
+    .skill-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+    .skill { background: white; border: 1px solid var(--line); border-radius: 15px; padding: 17px 18px; font-weight: 700; font-size: 14px; box-shadow: 0 5px 18px rgba(34,43,75,.035); }
+    .skill small { display: block; color: var(--muted); font-weight: 400; font-size: 11px; margin-top: 3px; }
+    .experience { display: grid; grid-template-columns: 190px 1fr; gap: 25px; }
+    .date { color: var(--accent); font-size: 13px; font-weight: 700; padding-top: 5px; }
+    .experience-card, .project-card { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: 0 8px 28px rgba(34,43,75,.045); }
+    .experience-card h3, .project-card h3 { font-size: 19px; margin-bottom: 4px; }
+    .company { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+    .experience-card p, .project-card p { color: var(--muted); font-size: 14px; }
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .project-number { color: #b7b1f0; font: 800 13px "Manrope"; margin-bottom: 18px; }
+    .project-card { min-height: 210px; }
+    .project-card h3 { color: var(--ink); }
+    .project-card p { margin-top: 10px; }
+    .note { color: var(--muted); font-size: 12px; margin-top: 17px; }
+    .contact-box { background: #1d2944; color: white; border-radius: 28px; padding: 43px; display: flex; justify-content: space-between; align-items: center; gap: 25px; }
+    .contact-box h2 { margin: 0; }
+    .contact-box p { color: #c2cbe0; margin-top: 9px; max-width: 600px; }
+    .contact-box .button { background: white; color: var(--accent-dark); flex-shrink: 0; }
+    .contact-details { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 23px; }
+    .contact-details a { color: #e5e9f4; text-decoration: none; font-size: 14px; }
+    footer { padding: 27px 0; color: var(--muted); font-size: 12px; text-align: center; }
+    @media (max-width: 850px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 35px; }
+      .profile-card { max-width: 430px; transform: none; }
+      .skill-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav { padding: 15px 0; align-items: flex-start; flex-direction: column; }
+      .nav-links { gap: 15px; flex-wrap: wrap; }
+      .nav-links a { font-size: 12px; }
+      .hero { padding: 65px 0 55px; }
+      h1 { letter-spacing: -1.8px; }
+      section { padding: 54px 0; }
+      .experience { grid-template-columns: 1fr; gap: 8px; }
+      .contact-box { padding: 28px; align-items: flex-start; flex-direction: column; }
+      .about-panel { padding: 24px; }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="logo" href="#home">Shanmugapriya<span>.</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a class="nav-cta" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<header>
-    <nav>
-        <h2>Shanmugapriya.</h2>
-
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
         <div>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
+          <div class="eyebrow">Java Backend Developer</div>
+          <h1>Building reliable<br><span>backend solutions.</span></h1>
+          <p class="intro">I’m Shanmugapriya D, a software developer based in Chennai, India, with hands-on experience in Java, Spring Boot, REST APIs and MySQL backend development.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="resume.pdf" download>↓ Download Resume</a>
+            <a class="button secondary" href="#projects">Explore My Work&nbsp; ↗</a>
+          </div>
         </div>
-    </nav>
-</header>
+        <aside class="profile-card">
+          <div class="profile-mark">SD</div>
+          <h3>Shanmugapriya D</h3>
+          <p>Software Developer · Chennai, India</p>
+          <div class="availability">Open to Java Developer opportunities</div>
+        </aside>
+      </div>
+    </section>
 
-<section class="hero">
-    <h3 class="subtitle">JAVA BACKEND DEVELOPER</h3>
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">A little about me</div>
+          <h2>About Me</h2>
+        </div>
+        <div class="about-panel">
+          <p>I am a Java-focused Software Developer experienced in developing and maintaining enterprise applications. My work includes backend module development, REST API implementation, MySQL queries, database integration and application support. I enjoy understanding business requirements and turning them into practical, maintainable software solutions.</p>
+        </div>
+      </div>
+    </section>
 
-    <h1>
-        Hi, I'm <span>Shanmugapriya D</span>
-    </h1>
+    <section id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">What I work with</div>
+          <h2>Technical Skills</h2>
+          <p class="section-copy">Core technologies and tools used in my development work.</p>
+        </div>
+        <div class="skill-grid">
+          <div class="skill">Java <small>Core Java · Java 8 / 21</small></div>
+          <div class="skill">Spring Boot <small>Backend application development</small></div>
+          <div class="skill">Spring MVC <small>MVC-based web applications</small></div>
+          <div class="skill">REST APIs <small>API development and integration</small></div>
+          <div class="skill">MySQL <small>Database operations</small></div>
+          <div class="skill">SQL <small>Queries, joins and reporting</small></div>
+          <div class="skill">Maven <small>Build and dependency management</small></div>
+          <div class="skill">Postman & Git <small>API testing and version control</small></div>
+        </div>
+      </div>
+    </section>
 
-    <p>
-        Software Developer based in Chennai, India.
-        Experienced in Java, Spring Boot, REST APIs
-        and MySQL backend development.
-    </p>
-</section>
+    <section id="experience">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Career journey</div>
+          <h2>Work Experience</h2>
+        </div>
+        <div class="experience">
+          <div class="date">APR 2022 — PRESENT</div>
+          <article class="experience-card">
+            <h3>Software Developer</h3>
+            <div class="company">Oasys Cybernetics</div>
+            <p>Working on enterprise software applications with a focus on Java backend development, REST APIs, MySQL database operations, application enhancements and production issue analysis.</p>
+          </article>
+        </div>
+        <div class="experience" style="margin-top:18px">
+          <div class="date">SEP 2020 — MAR 2022</div>
+          <article class="experience-card">
+            <h3>Helpdesk Support & Manual QA Tester</h3>
+            <div class="company">Earlier Experience</div>
+            <p>Handled application support, manual testing, issue identification and validation, building a strong understanding of application behaviour and user requirements.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<section id="about">
-    <h2>About Me</h2>
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Selected domain experience</div>
+          <h2>Project Experience</h2>
+          <p class="section-copy">Enterprise application experience across supply-chain and business workflows.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-number">01 / DOMAIN</div>
+            <h3>UPEXCISE</h3>
+            <p>Experience supporting liquor supply-chain workflows through backend application development, database operations and maintenance.</p>
+          </article>
+          <article class="project-card">
+            <div class="project-number">02 / DOMAIN</div>
+            <h3>IESCMS</h3>
+            <p>Enterprise application work involving backend functionality, SQL operations, reporting requirements and application support.</p>
+          </article>
+          <article class="project-card">
+            <div class="project-number">03 / DOMAIN</div>
+            <h3>SCM Track & Trace</h3>
+            <p>Supply-chain tracking application experience involving backend processing, database integration and issue resolution.</p>
+          </article>
+        </div>
+        <p class="note">Project descriptions are kept high-level. Share only information that you are permitted to disclose publicly; do not upload confidential source code, screenshots or business data.</p>
+      </div>
+    </section>
 
-    <p>
-        I am a Java-focused Software Developer with
-        experience in developing and maintaining
-        enterprise applications.
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <div class="section-kicker" style="color:#bcb5ff">Get in touch</div>
+            <h2>Let’s connect.</h2>
+            <p>I’m interested in Java Developer opportunities. Feel free to reach out for relevant roles or professional discussions.</p>
+            <div class="contact-details">
+              <a href="mailto:YOUR_EMAIL@example.com">pshanmuga78@gmail.com</a>
+              <a href="https://www.linkedin.com/in/shanmugapriya-d-ba7b601a5/
+ " target="_blank" rel="noopener noreferrer">LinkedIn Profile ↗</a>
+            </div>
+          </div>
+          <a class="button" href="mailto:YOUR_EMAIL@example.com">Email Me&nbsp; ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        I have hands-on experience in backend development,
-        REST API development, SQL queries and database
-        integration.
-    </p>
-</section>
-
-<section id="skills">
-    <h2>Technical Skills</h2>
-
-    <div class="skills">
-        <span>Java</span>
-        <span>Spring Boot</span>
-        <span>Spring MVC</span>
-        <span>REST APIs</span>
-        <span>MySQL</span>
-        <span>SQL</span>
-        <span>Hibernate / JPA</span>
-        <span>Maven</span>
-        <span>Git</span>
-        <span>Postman</span>
-    </div>
-</section>
-
-<section id="experience">
-    <h2>Work Experience</h2>
-
-    <div class="card">
-        <h3>Software Developer</h3>
-        <h4>Oasys Cybernetics</h4>
-        <p>April 2022 – Present</p>
-
-        <p>
-            Working on Java backend development,
-            Spring Boot applications, REST APIs,
-            MySQL database operations and enterprise
-            application maintenance.
-        </p>
-    </div>
-
-    <div class="card">
-        <h3>Helpdesk Support & Manual QA Tester</h3>
-        <p>September 2020 – March 2022</p>
-
-        <p>
-            Application support, manual testing,
-            issue identification and validation.
-        </p>
-    </div>
-</section>
-
-<section id="projects">
-    <h2>Project Experience</h2>
-
-    <div class="card">
-        <h3>UPEXCISE</h3>
-        <p>
-            Enterprise liquor supply-chain application
-            involving backend development and database
-            operations.
-        </p>
-    </div>
-
-    <div class="card">
-        <h3>IESCMS</h3>
-        <p>
-            Enterprise application development,
-            SQL operations and backend functionality.
-        </p>
-    </div>
-
-    <div class="card">
-        <h3>SCM Track & Trace</h3>
-        <p>
-            Supply-chain tracking application involving
-            backend processing and database integration.
-        </p>
-    </div>
-</section>
-
-<section id="contact">
-    <h2>8903479655</h2>
-
-    <p>Email:
-        <a href="mailto:YOUR_EMAIL@gmail.com">
-            pshanmuga78@gmail.com
-        </a>
-    </p>
-
-    <p>LinkedIn:
-        <a href="https://www.linkedin.com/in/shanmugapriya-d-ba7b601a5/" target="_blank">
-            My LinkedIn Profile
-        </a>
-    </p>
-</section>
-
-<footer>
-    <p>© 2026 Shanmugapriya D | Java Developer</p>
-</footer>
-
+  <footer>
+    <div class="container">© 2026 Shanmugapriya D · Java Backend Developer</div>
+  </footer>
 </body>
 </html>
+
